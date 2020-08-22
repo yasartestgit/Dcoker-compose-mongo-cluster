@@ -1,0 +1,39 @@
+step 1:
+From app1 one:
+db = (new Mongo('localhost:27017')).getDB('test')
+
+
+Step 2:
+config = {
+  "_id": "comments",
+  "members": [
+    {
+      "_id": 0,
+      "host": "app1:27017"
+    },
+    {
+      "_id": 1,
+      "host": "app2:27017"
+    },
+    {
+      "_id": 2,
+      "host": "app3:27017"
+    }
+  ]
+}
+
+Step 3:
+
+rs.initiate(config)
+
+
+
+
+Insert db collection--
+db.mycollection.insert({comment:"HI eventech team, how are you"})
+
+db.mycollection.find()
+
+
+**On secondary app use below cmd**
+db.setSlaveOk()
