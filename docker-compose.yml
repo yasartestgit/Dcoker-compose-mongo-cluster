@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  app1:
+    image: mongo
+    ports:
+      - 30001:27017
+    
+    networks:
+      - mongocluster
+    command: mongod --replSet comments
+  app2:
+    image: mongo
+    ports:
+      - 30002:27017
+    
+    networks:
+      - mongocluster
+    command: mongod --replSet comments
+    depends_on :
+      - app1
+  app3:
+    image: mongo
+    ports:
+      - 30003:27017
+     
+    networks:
+      - mongocluster
+    command: mongod --replSet comments
+    depends_on :
+        - app2
+
+networks:
+  mongocluster:
+    driver: bridge
+
